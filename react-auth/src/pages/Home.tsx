@@ -1,29 +1,18 @@
-import React, {useEffect, useState} from 'react';
-import {NavLink} from "react-router-dom";
-import axios from "axios";
+import React from 'react';
 
-const Home = () => {
 
-    const [message, setMessage] = useState('');
+const Home = ({user}: {user:any}) => {
 
-    useEffect(()=>{
-        (
-            async () => {
-                try {
-                    const response = await axios.get('user');
-                    console.log(response);
-                    const user = response.data;
-                    setMessage(`Hello! ${user.first_name} ${user.last_name}. You're logged in.` )
-                }catch (e){
-                    setMessage('You are not logged in');
-                }
+    let message;
+    if(user)
+    {
+        message = `Hello! ${user.first_name} ${user.last_name}. You're logged in.`;
+    }else
+    {
+        message = 'You are not logged in';
+    }
 
-            }
-        )
-        (
 
-        )
-    },[]);
 
     return (
         <div className="container">

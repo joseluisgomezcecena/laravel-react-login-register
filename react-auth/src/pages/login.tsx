@@ -11,12 +11,17 @@ const Login = () => {
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault();
 
-        const response = axios.post('login', {
+        const response = await axios.post('login', {
             email,
             password
         });
 
-        setRedirect(true);
+        if(response){
+            setRedirect(true);
+        }else{
+            setRedirect(false);
+        }
+
     }
 
     if (redirect){
