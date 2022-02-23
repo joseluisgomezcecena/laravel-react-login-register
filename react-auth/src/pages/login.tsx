@@ -1,8 +1,8 @@
 import React, {SyntheticEvent, useState} from 'react';
 import axios from "axios";
-import {Navigate} from "react-router-dom";
+import {Navigate, Link} from "react-router-dom";
 
-const Login = () => {
+const Login = ({setLogin}: {setLogin: Function}) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -11,17 +11,13 @@ const Login = () => {
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault();
 
-        const response = await axios.post('login', {
+        await axios.post('login', {
             email,
             password
         });
 
-        if(response){
-            setRedirect(true);
-        }else{
-            setRedirect(false);
-        }
-
+        setRedirect(true);
+        setLogin();
     }
 
     if (redirect){
@@ -50,6 +46,9 @@ const Login = () => {
                                     <label htmlFor="floatingPassword">Password</label>
                                 </div>
 
+                                <div className="mb-5">
+                                    <Link to="/forgot">Forgot Password? Click Here</Link>
+                                </div>
 
                                 <button className="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
                             </form>
