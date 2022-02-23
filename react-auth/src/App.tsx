@@ -8,11 +8,13 @@ import Register from "./pages/Register";
 import Nav from "./components/Nav";
 import axios from "axios";
 import Forgot from "./pages/Forgot";
+import Reset from "./pages/Reset";
 
 function App() {
 
     const [user, setUser] = useState(null);
     const [login, setLogin] = useState(false);
+    const [match, setMatch] = useState(null);
 
     useEffect(()=>{
         (
@@ -46,6 +48,8 @@ function App() {
               <Route path="/login" element={<Login setLogin={()=>setLogin(true)} />} />
               <Route path="/register" element={<Register />} />
               <Route path="/forgot" element={<Forgot />} />
+              <Route path="/reset/:token"  element={ <Reset match={match} /> }  />
+
           </Routes>
       </Router>
     </div>
